@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    hikari:
+      data-source-properties:
+        charSet: utf-8
+      read-only: true
+    username: ${JFIN_DBUSER:SYSDBA}
+    password: ${JFIN_DBPASSWORD:masterkey}
+    url: jdbc:firebirdsql:localhost:${JFIN_DBPATH}
+  jpa:
+    database-platform: org.hibernate.community.dialect.FirebirdDialect
+    hibernate:
+      ddl-auto: none
+    show-sql: true
