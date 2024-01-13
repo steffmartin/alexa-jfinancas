@@ -19,6 +19,7 @@
     <properties>
         <java.version>20</java.version>
         <kotlin.version>1.9.21</kotlin.version>
+        <aws.sdk.kotlin.version>1.0.0</aws.sdk.kotlin.version>
     </properties>
 
     <dependencies>
@@ -42,6 +43,11 @@
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-community-dialects</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>aws.sdk.kotlin</groupId>
+            <artifactId>dynamodb-jvm</artifactId>
+            <version>${aws.sdk.kotlin.version}</version>
         </dependency>
     </dependencies>
 

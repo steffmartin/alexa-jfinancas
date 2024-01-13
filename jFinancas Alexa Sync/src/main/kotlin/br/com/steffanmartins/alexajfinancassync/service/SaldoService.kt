@@ -1,5 +1,6 @@
 package br.com.steffanmartins.alexajfinancassync.service
 
+import br.com.steffanmartins.alexajfinancassync.datasource.alexa.document.SaldoDocument
 import br.com.steffanmartins.alexajfinancassync.datasource.jfinancas.entity.JFinancasContaEntity
 import br.com.steffanmartins.alexajfinancassync.datasource.jfinancas.repository.JFinancasContaRepository
 import br.com.steffanmartins.alexajfinancassync.datasource.jfinancas.repository.JFinancasMovcontaRepository
@@ -18,8 +19,13 @@ class SaldoService(
     fun contasAtivas() {
         val contasAtivas = contaRepo.findAll(specBuscarContas())
 
-        contasAtivas.forEach {
-            println("O saldo da conta ${it.nome} é R$ ${movimentoRepo.somaPorConta(it)}")
+        contasAtivas.map {
+            val saldo = movimentoRepo.somaPorConta(it).let { soma -> if (soma.equals(-0.0)) 0.0 else soma }
+            SaldoDocument("Steffan", it.tipoConta?.descricao ?: "", it.nome ?: "", saldo)
+        }.forEach {
+            println("Conta: ${it.conta} | Tipo: ${it.tipoConta} | Saldo: ${it.saldo}")
+            println("tableName: ${it.tableName()}")
+            println("itemValues: ${it.itemValues()}")
         }
     }
 
