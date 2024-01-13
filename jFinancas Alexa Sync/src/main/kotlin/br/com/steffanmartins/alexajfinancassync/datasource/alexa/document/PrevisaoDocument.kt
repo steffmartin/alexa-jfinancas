@@ -3,7 +3,7 @@ package br.com.steffanmartins.alexajfinancassync.datasource.alexa.document
 import aws.sdk.kotlin.services.dynamodb.model.AttributeValue
 import java.time.LocalDate
 
-data class PrevisoesDocument(
+data class PrevisaoDocument(
     val usuario: String,
     val vencimento: LocalDate,
     val tipo: TipoPrevisao,

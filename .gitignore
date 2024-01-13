@@ -2,3 +2,4 @@
 /infra/.terraform/
 /infra/terraform.tfstate
 /.idea/
+/infra/terraform.tfstate.backup
