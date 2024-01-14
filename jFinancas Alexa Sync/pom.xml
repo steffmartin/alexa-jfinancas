@@ -19,7 +19,6 @@
     <properties>
         <java.version>20</java.version>
         <kotlin.version>1.9.21</kotlin.version>
-        <aws.sdk.kotlin.version>1.0.0</aws.sdk.kotlin.version>
     </properties>
 
     <dependencies>
@@ -47,7 +46,7 @@
         <dependency>
             <groupId>aws.sdk.kotlin</groupId>
             <artifactId>dynamodb-jvm</artifactId>
-            <version>${aws.sdk.kotlin.version}</version>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
 
@@ -63,23 +62,30 @@
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
                 <configuration>
+                    <jvmTarget>${java.version}</jvmTarget>
                     <args>
-                        <arg>-Xjsr305=strict</arg>
+                        <arg>-Xjsr305=strict</arg> <!-- Enable strict mode for JSR-305 annotations -->
                     </args>
                     <compilerPlugins>
-                        <plugin>spring</plugin>
-                        <plugin>jpa</plugin>
+                        <plugin>jpa</plugin> <!-- specifies @Entity, @Embeddable, and @MappedSuperclass no-arg annotations automatically -->
+                        <plugin>spring</plugin> <!-- classes annotated with @Async, @Transactional, @Cacheable, @SpringBootTest, @Configuration, @Controller, @RestController, @Service or @Repository are automatically opened -->
+                        <plugin>all-open</plugin> <!-- open classes annotated with annotations defined inside pluginOptions -->
                     </compilerPlugins>
+                    <pluginOptions>
+                        <option>all-open:annotation=jakarta.persistence.Entity</option>
+                        <option>all-open:annotation=jakarta.persistence.Embeddable</option>
+                        <option>all-open:annotation=jakarta.persistence.MappedSuperclass</option>
+                    </pluginOptions>
                 </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>org.jetbrains.kotlin</groupId>
-                        <artifactId>kotlin-maven-allopen</artifactId>
+                        <artifactId>kotlin-maven-noarg</artifactId>
                         <version>${kotlin.version}</version>
                     </dependency>
                     <dependency>
                         <groupId>org.jetbrains.kotlin</groupId>
-                        <artifactId>kotlin-maven-noarg</artifactId>
+                        <artifactId>kotlin-maven-allopen</artifactId>
                         <version>${kotlin.version}</version>
                     </dependency>
                 </dependencies>
