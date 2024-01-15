@@ -1,5 +1,6 @@
 package br.com.steffanmartins.alexajfinancassync.service
 
+import aws.sdk.kotlin.services.dynamodb.DynamoDbClient
 import br.com.steffanmartins.alexajfinancassync.datasource.alexa.document.SaldoDocument
 import br.com.steffanmartins.alexajfinancassync.datasource.jfinancas.entity.JFinancasContaEntity
 import br.com.steffanmartins.alexajfinancassync.datasource.jfinancas.repository.JFinancasContaRepository
@@ -21,14 +22,15 @@ class SaldoService(
     fun contasAtivas() {
         val contasAtivas = contaRepo.findAll(specBuscarContas())
 
-        contasAtivas.map {
-            val saldo = movimentoRepo.somaPorConta(it).let { soma -> if (soma.equals(-0.0)) 0.0 else soma }
-            SaldoDocument("Steffan", it.tipoConta?.descricao ?: "", it.nome ?: "", saldo)
-        }.forEach {
-            println("Conta: ${it.conta} | Tipo: ${it.tipoConta} | Saldo: ${it.saldo}")
-            println("tableName: ${it.tableName()}")
-            println("itemValues: ${it.itemValues()}")
+        val saldos = contasAtivas.map {
+            val valor = movimentoRepo.somaPorConta(it).let { soma -> if (soma.equals(-0.0)) 0.0 else soma }
+            SaldoDocument("Steffan", it.tipoConta?.descricao ?: "", it.nome ?: "", valor).also { saldo ->
+                println("Conta: ${saldo.conta} | Tipo: ${it.tipoConta} | Saldo: ${saldo.saldo}")
+                println("tableName: ${saldo.tableName()}")
+                println("itemValues: ${saldo.itemValues()}")
+            }
         }
+
     }
 
     fun specBuscarContas(): Specification<JFinancasContaEntity> = Specification { contaRoot, _, builder ->
