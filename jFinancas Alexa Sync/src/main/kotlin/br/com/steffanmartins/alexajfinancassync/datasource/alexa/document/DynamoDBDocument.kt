@@ -4,6 +4,15 @@ import aws.sdk.kotlin.services.dynamodb.model.AttributeValue
 import java.time.LocalDate
 import java.util.*
 
+//@Target(AnnotationTarget.CLASS)
+//annotation class DynamoDBTable(val tableName: String)
+//
+//@Target(AnnotationTarget.FIELD, AnnotationTarget.PROPERTY_GETTER, AnnotationTarget.FUNCTION)
+//annotation class DynamoDBHashKey(val attributeName: String)
+//
+//@Target(AnnotationTarget.FIELD, AnnotationTarget.PROPERTY_GETTER, AnnotationTarget.FUNCTION)
+//annotation class DynamoDBRangeKey(val attributeName: String)
+
 interface DynamoDBDocument {
     fun tableName(): String
 

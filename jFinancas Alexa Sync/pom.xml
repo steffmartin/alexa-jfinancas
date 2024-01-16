@@ -22,18 +22,29 @@
     </properties>
 
     <dependencies>
+        <!-- libs padrão para o kotlin -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib</artifactId>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-reflect</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-stdlib</artifactId>
+        <dependency> <!-- aws sdk requirement -->
+            <groupId>org.jetbrains.kotlinx</groupId>
+            <artifactId>kotlinx-coroutines-reactor</artifactId>
+            <version>1.7.3</version>
+            <scope>runtime</scope>
         </dependency>
+
+        <!-- habilita o spring e o spring data jpa -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <!-- firebird -->
         <dependency>
             <groupId>org.firebirdsql.jdbc</groupId>
             <artifactId>jaybird</artifactId>
@@ -43,11 +54,14 @@
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-community-dialects</artifactId>
         </dependency>
+
+        <!-- aws dynamo -->
         <dependency>
             <groupId>aws.sdk.kotlin</groupId>
             <artifactId>dynamodb-jvm</artifactId>
             <version>1.0.0</version>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -64,12 +78,16 @@
                 <configuration>
                     <jvmTarget>${java.version}</jvmTarget>
                     <args>
-                        <arg>-Xjsr305=strict</arg> <!-- Enable strict mode for JSR-305 annotations -->
+                        <!-- Null safety para Spring Annotations -->
+                        <arg>-Xjsr305=strict</arg>
                     </args>
                     <compilerPlugins>
-                        <plugin>jpa</plugin> <!-- specifies @Entity, @Embeddable, and @MappedSuperclass no-arg annotations automatically -->
-                        <plugin>spring</plugin> <!-- classes annotated with @Async, @Transactional, @Cacheable, @SpringBootTest, @Configuration, @Controller, @RestController, @Service or @Repository are automatically opened -->
-                        <plugin>all-open</plugin> <!-- open classes annotated with annotations defined inside pluginOptions -->
+                        <!-- specifies @Entity, @Embeddable, and @MappedSuperclass no-arg annotations automatically -->
+                        <plugin>jpa</plugin>
+                        <!-- classes annotated with @Async, @Transactional, @Cacheable, @SpringBootTest, @Configuration, @Controller, @RestController, @Service or @Repository are automatically opened -->
+                        <plugin>spring</plugin>
+                        <!-- open classes annotated with annotations defined inside pluginOptions -->
+                        <plugin>all-open</plugin>
                     </compilerPlugins>
                     <pluginOptions>
                         <option>all-open:annotation=jakarta.persistence.Entity</option>

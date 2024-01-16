@@ -11,5 +11,7 @@ data class JFinancasTipocontaEntity(
     @Id @Column(name = "ID")
     var id: Int? = null,
     @Column(name = "DESCRICAO")
-    var descricao: String? = null
+    var descricao: String? = null,
+    @Column(name = "CAPITAL_GIRO")
+    var capitalGiro: Short? = null,
 )
