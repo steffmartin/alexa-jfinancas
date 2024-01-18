@@ -19,8 +19,8 @@ class SaldoService(
     private val dynamoDBRepository: DynamoDBRepository
 ) {
 
-    @EventListener(ApplicationReadyEvent::class)
     @Transactional(readOnly = true)
+
     fun contasAtivas() {
         val contasAtivas = contaRepo.findAll(specBuscarContas())
 
@@ -40,6 +40,14 @@ class SaldoService(
 
         println("terminado")
 
+    }
+
+
+    @EventListener(ApplicationReadyEvent::class)
+    fun deletarContas() {
+        runBlocking {
+            dynamoDBRepository.deletePartition(SaldoDocument("Jeff"))
+        }
     }
 
     fun specBuscarContas(): Specification<JFinancasContaEntity> = Specification { contaRoot, _, builder ->

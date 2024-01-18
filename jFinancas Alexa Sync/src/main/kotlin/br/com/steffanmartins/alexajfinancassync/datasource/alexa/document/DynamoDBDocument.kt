@@ -4,32 +4,35 @@ import aws.sdk.kotlin.services.dynamodb.model.AttributeValue
 import java.time.LocalDate
 import java.util.*
 
-//@Target(AnnotationTarget.CLASS)
-//annotation class DynamoDBTable(val tableName: String)
-//
-//@Target(AnnotationTarget.FIELD, AnnotationTarget.PROPERTY_GETTER, AnnotationTarget.FUNCTION)
-//annotation class DynamoDBHashKey(val attributeName: String)
-//
-//@Target(AnnotationTarget.FIELD, AnnotationTarget.PROPERTY_GETTER, AnnotationTarget.FUNCTION)
-//annotation class DynamoDBRangeKey(val attributeName: String)
+//TODO replicar o comportamento das anotações da SDK do Dynamo para Java, como @DynamoDBTable, etc.
 
 interface DynamoDBDocument {
-    fun tableName(): String
 
-    fun itemKey(): MutableMap<String, AttributeValue>
+    fun tableName(): String
+    fun partitionKeyName(): String
+    fun partitionKeyValue(): Any
+    fun sortKeyName(): String
+    fun sortKeyValue(): Any
+
+    fun partitionKeyAttribute(): AttributeValue = toAttributeValue(partitionKeyValue())
+
+    fun sortKeyAttribute(): AttributeValue = toAttributeValue(sortKeyValue())
 
     fun itemValues(): MutableMap<String, AttributeValue> = javaClass.declaredFields
         .associate {
-            val attributeName = convertFieldNameToAttributeName(it.name)
+            val attributeName = toAttributeName(it.name)
             val fieldValue = javaClass.getDeclaredMethod("get${attributeName}").invoke(this)
-            attributeName to convertFieldValueToAttributeValue(fieldValue)
+            attributeName to toAttributeValue(fieldValue)
         }
         .toMutableMap()
-        .also { it.putAll(itemKey()) }
+        .also {
+            it[partitionKeyName()] = partitionKeyAttribute()
+            it[sortKeyName()] = sortKeyAttribute()
+        }
 
-    private fun convertFieldNameToAttributeName(name: String) = name.replaceFirstChar { it.titlecase(Locale.getDefault()) }
+    private fun toAttributeName(name: String) = name.replaceFirstChar { it.titlecase(Locale.getDefault()) }
 
-    private fun convertFieldValueToAttributeValue(value: Any?): AttributeValue = when (value) {
+    private fun toAttributeValue(value: Any?): AttributeValue = when (value) {
         null -> AttributeValue.Null(true)
         is String -> AttributeValue.S(value)
         is Number -> AttributeValue.N(value.toString())
