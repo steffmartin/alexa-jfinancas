@@ -5,6 +5,7 @@ import br.com.steffanmartins.alexajfinancassync.datasource.alexa.repository.Dyna
 import br.com.steffanmartins.alexajfinancassync.datasource.jfinancas.entity.JFinancasContaEntity
 import br.com.steffanmartins.alexajfinancassync.datasource.jfinancas.repository.JFinancasContaRepository
 import br.com.steffanmartins.alexajfinancassync.datasource.jfinancas.repository.JFinancasMovcontaRepository
+import br.com.steffanmartins.alexajfinancassync.view.TrayIconDemo
 import kotlinx.coroutines.runBlocking
 import org.springframework.boot.context.event.ApplicationReadyEvent
 import org.springframework.context.event.EventListener
@@ -16,7 +17,8 @@ import org.springframework.transaction.annotation.Transactional
 class SaldoService(
     private val contaRepo: JFinancasContaRepository,
     private val movimentoRepo: JFinancasMovcontaRepository,
-    private val dynamoDBRepository: DynamoDBRepository
+    private val dynamoDBRepository: DynamoDBRepository,
+    private val trayIconDemo: TrayIconDemo
 ) {
 
     @Transactional(readOnly = true)
@@ -43,12 +45,18 @@ class SaldoService(
     }
 
 
-    @EventListener(ApplicationReadyEvent::class)
     fun deletarContas() {
         runBlocking {
             dynamoDBRepository.deletePartition(SaldoDocument("Jeff"))
         }
     }
+
+    @EventListener(ApplicationReadyEvent::class)
+    fun testarNotificacao(){
+        trayIconDemo.displayTray()
+        trayIconDemo.closeTray()
+    }
+
 
     fun specBuscarContas(): Specification<JFinancasContaEntity> = Specification { contaRoot, _, builder ->
         builder.equal(contaRoot.get<Short?>("inativo"), 0)
