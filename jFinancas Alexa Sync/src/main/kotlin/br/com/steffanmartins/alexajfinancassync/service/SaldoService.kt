@@ -54,7 +54,7 @@ class SaldoService(
     @EventListener(ApplicationReadyEvent::class)
     fun testarNotificacao() {
         runBlocking {
-            trayIcon.displayMessage()
+            trayIcon.displayInfo("Suas informações financeiras estão sendo sincronizadas com a Alexa agora.")
             trayIcon.close()
         }
     }

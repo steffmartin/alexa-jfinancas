@@ -30,11 +30,9 @@ class TrayIconView(
         tray.add(trayIcon)
     }
 
-    suspend fun displayMessage() = trayIcon.displayMessage(
-        "jFinanças Alexa Sync",
-        "Suas informações financeiras estão sendo sincronizadas com a Alexa agora.",
-        MessageType.INFO
-    )
+    suspend fun displayInfo(msg: String) = trayIcon.displayMessage("jFinanças Alexa Sync", msg, MessageType.INFO)
+
+    suspend fun displayError(msg: String) = trayIcon.displayMessage("jFinanças Alexa Sync", msg, MessageType.ERROR)
 
     override fun close() = tray.remove(trayIcon)
 }
