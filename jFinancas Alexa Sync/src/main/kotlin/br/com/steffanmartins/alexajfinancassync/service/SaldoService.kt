@@ -5,7 +5,7 @@ import br.com.steffanmartins.alexajfinancassync.datasource.alexa.repository.Dyna
 import br.com.steffanmartins.alexajfinancassync.datasource.jfinancas.entity.JFinancasContaEntity
 import br.com.steffanmartins.alexajfinancassync.datasource.jfinancas.repository.JFinancasContaRepository
 import br.com.steffanmartins.alexajfinancassync.datasource.jfinancas.repository.JFinancasMovcontaRepository
-import br.com.steffanmartins.alexajfinancassync.view.TrayIconDemo
+import br.com.steffanmartins.alexajfinancassync.view.TrayIconView
 import kotlinx.coroutines.runBlocking
 import org.springframework.boot.context.event.ApplicationReadyEvent
 import org.springframework.context.event.EventListener
@@ -18,7 +18,7 @@ class SaldoService(
     private val contaRepo: JFinancasContaRepository,
     private val movimentoRepo: JFinancasMovcontaRepository,
     private val dynamoDBRepository: DynamoDBRepository,
-    private val trayIconDemo: TrayIconDemo
+    private val trayIcon: TrayIconView
 ) {
 
     @Transactional(readOnly = true)
@@ -52,9 +52,11 @@ class SaldoService(
     }
 
     @EventListener(ApplicationReadyEvent::class)
-    fun testarNotificacao(){
-        trayIconDemo.displayTray()
-        trayIconDemo.closeTray()
+    fun testarNotificacao() {
+        runBlocking {
+            trayIcon.displayMessage()
+            trayIcon.close()
+        }
     }
 
 
