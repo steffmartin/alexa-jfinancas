@@ -16,9 +16,8 @@ import kotlinx.coroutines.withContext
 import org.springframework.stereotype.Repository
 
 @Repository
-@OptIn(ExperimentalCoroutinesApi::class)
 class DynamoDBRepository(
-    private val dbClient: DynamoDbClient,
+    private val dbClient: DynamoDbClient
 ) {
 
     // EXCLUIR PARTIÇÃO DA TABELA
@@ -31,6 +30,7 @@ class DynamoDBRepository(
         }.all { it.unprocessedItems.isNullOrEmpty() }
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class) //flatMapConcat needs optIn
     private suspend fun getKeys(example: DynamoDBDocument): List<Map<String, AttributeValue>> = with(example) {
         dbClient.queryPaginated {
             tableName = tableName()
