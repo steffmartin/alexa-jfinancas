@@ -6,13 +6,11 @@ import aws.sdk.kotlin.services.dynamodb.model.AttributeValue
 import aws.sdk.kotlin.services.dynamodb.model.WriteRequest
 import aws.sdk.kotlin.services.dynamodb.paginators.queryPaginated
 import br.com.steffanmartins.alexajfinancassync.datasource.alexa.document.DynamoDBDocument
-import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.toList
-import kotlinx.coroutines.withContext
 import org.springframework.stereotype.Repository
 
 @Repository
@@ -22,13 +20,12 @@ class DynamoDBRepository(
 
     // EXCLUIR PARTIÇÃO DA TABELA
 
-    suspend fun deletePartition(example: DynamoDBDocument): Boolean = withContext(IO) {
+    suspend fun deletePartition(example: DynamoDBDocument): Boolean =
         getKeys(example).chunked(25).map {
             dbClient.batchWriteItem {
                 requestItems = toDeleteRequests(example.tableName(), it)
             }
         }.all { it.unprocessedItems.isNullOrEmpty() }
-    }
 
     @OptIn(ExperimentalCoroutinesApi::class) //flatMapConcat needs optIn
     private suspend fun getKeys(example: DynamoDBDocument): List<Map<String, AttributeValue>> = with(example) {
@@ -53,13 +50,12 @@ class DynamoDBRepository(
 
     // SALVAR ITENS NA TABELA
 
-    suspend fun saveAll(documents: Iterable<DynamoDBDocument>): Boolean = withContext(IO) {
+    suspend fun saveAll(documents: Iterable<DynamoDBDocument>): Boolean =
         documents.chunked(25).map {
             dbClient.batchWriteItem {
                 requestItems = toWriteRequests(it)
             }
         }.all { it.unprocessedItems.isNullOrEmpty() }
-    }
 
 
     private fun toWriteRequests(chunk: Iterable<DynamoDBDocument>): Map<String, List<WriteRequest>> =

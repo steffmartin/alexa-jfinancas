@@ -7,32 +7,25 @@ import java.awt.Image
 import java.awt.SystemTray
 import java.awt.TrayIcon
 import java.awt.TrayIcon.MessageType
-import java.io.Closeable
+import java.awt.TrayIcon.MessageType.INFO
 import javax.imageio.ImageIO
 
 @Component
 class SystemTrayView(
     @Value("trayIcon.png") private val icon: ClassPathResource
-) : Closeable {
+) {
 
     private lateinit var tray: SystemTray
     private lateinit var trayIcon: TrayIcon
 
     init {
         System.setProperty("java.awt.headless", "false")
-
         val image: Image = ImageIO.read(icon.getInputStream())
-
-        trayIcon = TrayIcon(image, "jFinanças Alexa Sync está em execução")
-        trayIcon.setImageAutoSize(true)
-
-        tray = SystemTray.getSystemTray()
-        tray.add(trayIcon)
+        trayIcon = TrayIcon(image, "jFinanças Alexa Sync").apply { isImageAutoSize = true }
+        tray = SystemTray.getSystemTray().apply { add(trayIcon) }
     }
 
-    suspend fun showInfo(msg: String) = trayIcon.displayMessage("jFinanças Alexa Sync", msg, MessageType.INFO)
+    fun notificar(msg: String, level: MessageType = INFO) = trayIcon.displayMessage(trayIcon.toolTip, msg, level)
 
-    suspend fun showError(msg: String) = trayIcon.displayMessage("jFinanças Alexa Sync", msg, MessageType.ERROR)
-
-    override fun close() = tray.remove(trayIcon)
+    fun encerrar() = tray.remove(trayIcon)
 }
