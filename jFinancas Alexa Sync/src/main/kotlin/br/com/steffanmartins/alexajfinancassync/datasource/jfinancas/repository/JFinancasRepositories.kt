@@ -7,9 +7,6 @@ import org.springframework.data.repository.Repository
 import java.time.LocalDate
 
 
-interface JFinancasClienteRepository : JpaSpecificationExecutor<JFinancasClienteEntity>,
-    Repository<JFinancasClienteEntity, Int>
-
 interface JFinancasContaRepository : JpaSpecificationExecutor<JFinancasContaEntity>,
     Repository<JFinancasContaEntity, Int>
 
@@ -18,6 +15,9 @@ interface JFinancasCpagarRepository : JpaSpecificationExecutor<JFinancasCpagarEn
 
 interface JFinancasCreceberRepository : JpaSpecificationExecutor<JFinancasCreceberEntity>,
     Repository<JFinancasCreceberEntity, Int>
+
+interface JFinancasTransfProgRepository : JpaSpecificationExecutor<JFinancasTransfProgEntity>,
+    Repository<JFinancasTransfProgEntity, Int>
 
 interface JFinancasMovcontaRepository : JpaSpecificationExecutor<JFinancasMovcontaEntity>,
     Repository<JFinancasMovcontaEntity, Int> {
@@ -33,14 +33,11 @@ interface JFinancasMovcontaRepository : JpaSpecificationExecutor<JFinancasMovcon
     fun somaPorConta(contaBuscada: JFinancasContaEntity, dataLimite: LocalDate = LocalDate.now()): Double
 }
 
-interface JFinancasPlanodecontasRepository : JpaSpecificationExecutor<JFinancasPlanodecontasEntity>,
-    Repository<JFinancasPlanodecontasEntity, Int>
+//interface JFinancasClienteRepository : JpaSpecificationExecutor<JFinancasClienteEntity>,
+//    Repository<JFinancasClienteEntity, Int>
 
-interface JFinancasTipocontaRepository : JpaSpecificationExecutor<JFinancasTipocontaEntity>,
-    Repository<JFinancasTipocontaEntity, Int>
+//interface JFinancasPlanodecontasRepository : JpaSpecificationExecutor<JFinancasPlanodecontasEntity>,
+//    Repository<JFinancasPlanodecontasEntity, Int>
 
-interface JFinancasTipopagamentoRepository : JpaSpecificationExecutor<JFinancasTipopagamentoEntity>,
-    Repository<JFinancasTipopagamentoEntity, Int>
-
-interface JFinancasTransfProgRepository : JpaSpecificationExecutor<JFinancasTransfProgEntity>,
-    Repository<JFinancasTransfProgEntity, Int>
+//interface JFinancasTipocontaRepository : JpaSpecificationExecutor<JFinancasTipocontaEntity>,
+//    Repository<JFinancasTipocontaEntity, Int>

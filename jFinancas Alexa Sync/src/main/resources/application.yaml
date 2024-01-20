@@ -20,3 +20,5 @@ aws:
   secretAccessKey: ${JFSYNC_AWS_SECRET_ACCESS_KEY:${AWS_SECRET_ACCESS_KEY}}
 config:
   userId: ${JFSYNC_ALEXA_USER_ID}
+  tipoContaCartao: ${JFSYNC_TIPO_CTA_CARTAO:Cartão de Crédito}
+  tipoContaSalario: ${JFSYNC_TIPO_CTA_SALARIO:Salário}

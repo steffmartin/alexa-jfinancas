@@ -26,14 +26,7 @@ class SaldoService(
 
         val saldos = contaRepo.findAll(filtroContas())
             .associateWith { movimentoRepo.somaPorConta(it) }
-            .map { (conta, saldo) ->
-                SaldoDocument(
-                    usuario = props.userId,
-                    tipoConta = conta.tipoConta?.descricao ?: "Sem Tipo",
-                    conta = conta.nome ?: "Sem Nome",
-                    saldo = saldo.let { valor -> if (valor.equals(-0.0)) 0.0 else valor }
-                )
-            }
+            .map { (conta, saldo) -> toSaldoDocument(conta, saldo) }
 
         if (!alexaRepo.saveAll(saldos)) {
             throw IOException("Houve um erro durante a gravação de saldos.")
@@ -46,8 +39,15 @@ class SaldoService(
     //    - excluir contas parametrizadas no contaExcluir (ex: Empréstimos)
     //    - respeitar o parametro 'excluir todas as contas não mostradas na página inicial'
     //    - respeitar o parametro 'excluir todas as contas não mostradas na previsão financeira'
-    private fun filtroContas(): Specification<JFinancasContaEntity> = Specification { contaRoot, _, cb ->
+    private fun filtroContas() = Specification<JFinancasContaEntity> { contaRoot, _, cb ->
         cb.equal(contaRoot.get<Short?>("inativo"), 0)
     }
+
+    private fun toSaldoDocument(conta: JFinancasContaEntity, saldo: Double) = SaldoDocument(
+        usuario = props.userId,
+        tipoConta = conta.tipoConta?.descricao ?: "Sem Tipo",
+        conta = conta.nome ?: "Sem Nome",
+        saldo = saldo.let { valor -> if (valor.equals(-0.0)) 0.0 else valor }
+    )
 
 }

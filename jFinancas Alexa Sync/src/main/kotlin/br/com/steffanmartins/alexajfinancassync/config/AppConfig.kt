@@ -4,5 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties
 
 @ConfigurationProperties("config")
 data class AppProperties(
-    val userId: String
+    val userId: String,
+    val tipoContaCartao: String,
+    val tipoContaSalario: String
 )

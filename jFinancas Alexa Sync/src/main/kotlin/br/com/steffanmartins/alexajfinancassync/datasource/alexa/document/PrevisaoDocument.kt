@@ -6,7 +6,6 @@ data class PrevisaoDocument(
     val usuario: String,
     val vencimento: LocalDate = LocalDate.now(),
     val tipo: TipoPrevisao = TipoPrevisao.PAGAR,
-    val conta: String = "",
     val credorDevedor: String = "",
     val categoria: String = "",
     val subCategoria: String = "",
@@ -22,7 +21,7 @@ data class PrevisaoDocument(
     override fun partitionKeyName(): String = "Usuario"
     override fun partitionKeyValue(): String = usuario
     override fun sortKeyName(): String = "VencimentoETipo"
-    override fun sortKeyValue(): String = "${vencimento}#${tipo}"
+    override fun sortKeyValue(): String = "${vencimento}#${tipo}#${hashCode()}"
 
     enum class TipoPrevisao {
         PAGAR, RECEBER

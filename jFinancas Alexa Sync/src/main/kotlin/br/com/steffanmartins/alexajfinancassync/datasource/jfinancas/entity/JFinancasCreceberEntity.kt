@@ -23,7 +23,5 @@ data class JFinancasCreceberEntity(
     @ManyToOne @JoinColumn(name = "ID_CLIENTE", referencedColumnName = "ID")
     var cliente: JFinancasClienteEntity? = null,
     @ManyToOne @JoinColumn(name = "ID_PLANCONTA", referencedColumnName = "ID")
-    var planoDeContas: JFinancasPlanodecontasEntity? = null,
-    @ManyToOne @JoinColumn(name = "ID_TIPOPGTO", referencedColumnName = "ID")
-    var tipoPagamento: JFinancasTipopagamentoEntity? = null
+    var planoDeContas: JFinancasPlanodecontasEntity? = null
 )

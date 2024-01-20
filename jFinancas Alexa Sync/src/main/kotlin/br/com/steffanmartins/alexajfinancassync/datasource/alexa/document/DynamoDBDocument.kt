@@ -4,8 +4,6 @@ import aws.sdk.kotlin.services.dynamodb.model.AttributeValue
 import java.time.LocalDate
 import java.util.*
 
-//TODO replicar o comportamento das anotações da SDK do Dynamo para Java, como @DynamoDBTable, etc.
-
 interface DynamoDBDocument {
 
     fun tableName(): String

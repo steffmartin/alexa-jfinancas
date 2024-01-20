@@ -18,8 +18,6 @@ class DynamoDBRepository(
     private val dbClient: DynamoDbClient
 ) {
 
-    // EXCLUIR PARTIÇÃO DA TABELA
-
     suspend fun deletePartition(example: DynamoDBDocument): Boolean =
         getKeys(example).chunked(25).map {
             dbClient.batchWriteItem {
@@ -47,8 +45,6 @@ class DynamoDBRepository(
             }
         }
     })
-
-    // SALVAR ITENS NA TABELA
 
     suspend fun saveAll(documents: Iterable<DynamoDBDocument>): Boolean =
         documents.chunked(25).map {

@@ -12,12 +12,12 @@ data class JFinancasTransfProgEntity(
     var vencimento: LocalDate? = null,
     @Column(name = "VALOR")
     var valor: Double? = null,
-    @Column(name = "HISTORICO")
-    var historico: String? = null,
     @Column(name = "STATUS")
     var status: Short? = null,
     @Column(name = "FIMFREQUENCIA")
     var fimFrequencia: Short? = null,
+    @Column(name = "HISTORICO")
+    var historico: String? = null,
     @ManyToOne @JoinColumn(name = "ID_CONTA", referencedColumnName = "ID")
     var contaOrigem: JFinancasContaEntity? = null,
     @ManyToOne @JoinColumn(name = "ID_CONTA_TO", referencedColumnName = "ID")
