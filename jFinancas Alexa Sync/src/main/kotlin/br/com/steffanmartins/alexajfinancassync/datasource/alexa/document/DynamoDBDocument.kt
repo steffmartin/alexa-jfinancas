@@ -38,6 +38,6 @@ interface DynamoDBDocument {
         is Number -> AttributeValue.N(value.toString())
         is LocalDate -> AttributeValue.S(value.toString())
         is Enum<*> -> AttributeValue.S(value.name)
-        else -> throw IllegalArgumentException("Unsupported field type: ${value.javaClass}")
+        else -> throw NotImplementedError("Conversão para AttributeValue não implementada para a classe: ${value.javaClass}")
     }
 }

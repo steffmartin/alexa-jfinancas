@@ -11,7 +11,7 @@ import java.io.Closeable
 import javax.imageio.ImageIO
 
 @Component
-class TrayIconView(
+class SystemTrayView(
     @Value("trayIcon.png") private val icon: ClassPathResource
 ) : Closeable {
 
@@ -30,9 +30,9 @@ class TrayIconView(
         tray.add(trayIcon)
     }
 
-    suspend fun displayInfo(msg: String) = trayIcon.displayMessage("jFinanças Alexa Sync", msg, MessageType.INFO)
+    suspend fun showInfo(msg: String) = trayIcon.displayMessage("jFinanças Alexa Sync", msg, MessageType.INFO)
 
-    suspend fun displayError(msg: String) = trayIcon.displayMessage("jFinanças Alexa Sync", msg, MessageType.ERROR)
+    suspend fun showError(msg: String) = trayIcon.displayMessage("jFinanças Alexa Sync", msg, MessageType.ERROR)
 
     override fun close() = tray.remove(trayIcon)
 }
