@@ -37,8 +37,7 @@ class PrevisaoService(
         }
     }
 
-    private fun calcularSalarioLiquido(): List<Any> {
-
+    private fun calcularSalarioLiquido() = runCatching {
         val aPagar = pagarRepo.findAll(filtroPrevisao(isSalario = true))
             .groupBy { it.conta to it.vencimento }
             .mapValues {
@@ -66,8 +65,8 @@ class PrevisaoService(
                 }
             }.filter { it.valor!!.compareTo(0.0) != 0 }
 
-        return aReceberLiquido + aPagar.values
-    }
+        aReceberLiquido + aPagar.values
+    }.getOrElse { throw Error("Houve um erro durante o cálculo do salário líquido.") }
 
     //   * Opções futuras:
     //       - excluir contas parametrizadas no tipoContaExcluir (ex: Salário, Cartão de Crédito)
@@ -123,7 +122,7 @@ class PrevisaoService(
                 vencimento = entity.vencimento!!,
                 valor = entity.valor!!,
                 descricao = entity.historico ?: "Sem descrição",
-                credorDevedor = "Diversos",
+                credorDevedor = entity.contaDestino!!.nome ?: "Diversos",
                 categoria = "Despesas",
                 subCategoria = "Despesas Diversas"
             )

@@ -43,11 +43,13 @@ class SaldoService(
         cb.equal(contaRoot.get<Short?>("inativo"), 0)
     }
 
-    private fun toSaldoDocument(conta: JFinancasContaEntity, saldo: Double) = SaldoDocument(
-        usuario = props.userId,
-        tipoConta = conta.tipoConta?.descricao ?: "Sem Tipo",
-        conta = conta.nome ?: "Sem Nome",
-        saldo = saldo.let { valor -> if (valor.equals(-0.0)) 0.0 else valor }
-    )
+    private fun toSaldoDocument(conta: JFinancasContaEntity, saldo: Double) = runCatching {
+        SaldoDocument(
+            usuario = props.userId,
+            tipoConta = conta.tipoConta?.descricao ?: "Sem Tipo",
+            conta = conta.nome ?: "Sem Nome",
+            saldo = saldo.let { valor -> if (valor.equals(-0.0)) 0.0 else valor }
+        )
+    }.getOrElse { throw Error("Houve um erro durante a conversão de saldos.") }
 
 }
