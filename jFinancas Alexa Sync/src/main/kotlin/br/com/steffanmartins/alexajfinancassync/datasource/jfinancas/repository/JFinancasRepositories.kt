@@ -23,7 +23,7 @@ interface JFinancasMovcontaRepository : JpaSpecificationExecutor<JFinancasMovcon
     Repository<JFinancasMovcontaEntity, Int> {
     @Query(
         """
-            SELECT COALESCE(TRUNC(SUM(m.valor * (CASE WHEN m.tipo IN (1, 2) THEN -1 ELSE 1 END)), 2),0)
+            SELECT COALESCE(ROUND(SUM(m.valor * (CASE WHEN m.tipo IN (1, 2) THEN -1 ELSE 1 END)), 2),0)
             FROM JFinancasMovcontaEntity m
             WHERE m.data <= :dataLimite
               AND m.status <> 31

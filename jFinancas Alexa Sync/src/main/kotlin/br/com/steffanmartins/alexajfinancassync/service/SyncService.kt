@@ -13,10 +13,10 @@ class SyncService(
     private val dynamoDbClient: DynamoDbClient
 ) {
     fun sync() = runBlocking(Dispatchers.IO) {
-        val job1 = launch { saldoService.sync() }
-        val job2 = launch { previsaoService.sync() }
-        job1.join()
-        job2.join()
+        val saldoJob = launch { saldoService.sync() }
+        val previsaoJob = launch { previsaoService.sync() }
+        saldoJob.join()
+        previsaoJob.join()
         dynamoDbClient.close()
     }
 }
