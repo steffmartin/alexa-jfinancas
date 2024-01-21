@@ -27,17 +27,20 @@ class PrevisaoService(
             throw IOException("Houve um erro durante a exclusão de previsões.")
         }
 
-        val previsoes = receberRepo.findAll(filtroPrevisao()).map(::toPrevisaoDocument) +
-                pagarRepo.findAll(filtroPrevisao()).map(::toPrevisaoDocument) +
-                transfRepo.findAll(filtroPrevisao(isCartao = true)).map(::toPrevisaoDocument) +
-                calcularSalarioLiquido().map(::toPrevisaoDocument)
+        val previsoes = (aReceber() + aPagar() + cartao() + salario()).map(::toPrevisaoDocument)
 
         if (!alexaRepo.saveAll(previsoes)) {
             throw IOException("Houve um erro durante a gravação de previsões.")
         }
     }
 
-    private fun calcularSalarioLiquido() = runCatching {
+    private fun aReceber() = receberRepo.findAll(filtroPrevisao())
+
+    private fun aPagar() = pagarRepo.findAll(filtroPrevisao())
+
+    private fun cartao() = transfRepo.findAll(filtroPrevisao(isCartao = true))
+
+    private fun salario() = runCatching {
         val aPagar = pagarRepo.findAll(filtroPrevisao(isSalario = true))
             .groupBy { it.conta to it.vencimento }
             .mapValues {
