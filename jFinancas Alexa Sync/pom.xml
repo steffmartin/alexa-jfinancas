@@ -12,7 +12,7 @@
 
     <groupId>br.com.steffanmartins</groupId>
     <artifactId>alexa-jfinancas-sync</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>jFinancas Alexa Sync</name>
     <description>jFinancas Alexa Sync</description>
 

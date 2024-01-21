@@ -9,6 +9,7 @@ import br.com.steffanmartins.alexajfinancassync.datasource.jfinancas.entity.*
 import br.com.steffanmartins.alexajfinancassync.datasource.jfinancas.repository.JFinancasCpagarRepository
 import br.com.steffanmartins.alexajfinancassync.datasource.jfinancas.repository.JFinancasCreceberRepository
 import br.com.steffanmartins.alexajfinancassync.datasource.jfinancas.repository.JFinancasTransfProgRepository
+import jakarta.persistence.criteria.Predicate
 import org.springframework.data.jpa.domain.Specification
 import org.springframework.stereotype.Service
 import java.io.IOException
@@ -71,27 +72,27 @@ class PrevisaoService(
         aReceberLiquido + aPagar.values
     }.getOrElse { throw Error("Houve um erro durante o cálculo do salário líquido.") }
 
-    //   * Opções futuras:
-    //       - excluir contas parametrizadas no tipoContaExcluir (ex: Salário, Cartão de Crédito)
-    //       - excluir contas parametrizadas no contaExcluir (ex: Empréstimos)
-    //       - excluir contas parametrizadas no categoriaExcluir (ex: Doações)
-    //       - respeitar o parametro 'excluir todas as contas não mostradas na página inicial'
-    //       - respeitar o parametro 'excluir todas as contas não mostradas na previsão financeira'
     private fun <T> filtroPrevisao(isSalario: Boolean = false, isCartao: Boolean = false) =
-        Specification<T> { previsaoRoot, _, cb ->
-            val contaRoot = previsaoRoot.join<T, JFinancasContaEntity>(if (isCartao) "contaDestino" else "conta")
-            val tipoContaRoot = contaRoot.join<JFinancasContaEntity, JFinancasTipocontaEntity>("tipoConta")
+        Specification<T> { prevRoot, _, cb ->
+            val ctaRoot = prevRoot.join<T, JFinancasContaEntity>(if (isCartao) "contaDestino" else "conta")
+            val tpCtaRoot = ctaRoot.join<JFinancasContaEntity, JFinancasTipocontaEntity>("tipoConta")
 
             cb.and(
-                cb.equal(previsaoRoot.get<Short?>("status"), 0),
-                cb.equal(previsaoRoot.get<Short?>("fimFrequencia"), 0),
-                if (isCartao) {
-                    cb.equal(tipoContaRoot.get<String?>("descricao"), props.tipoContaCartao)
-                } else if (isSalario) {
-                    cb.equal(tipoContaRoot.get<String?>("descricao"), props.tipoContaSalario)
-                } else {
-                    tipoContaRoot.get<String?>("descricao").`in`(props.tipoContaSalario, props.tipoContaCartao).not()
-                }
+                *mutableListOf<Predicate>().apply {
+                    add(cb.equal(prevRoot.get<Short?>("status"), 0))
+
+                    add(cb.equal(prevRoot.get<Short?>("fimFrequencia"), 0))
+
+                    if (isCartao) add(cb.equal(tpCtaRoot.get<String?>("descricao"), props.tipoCtaCartao))
+                    else if (isSalario) add(cb.equal(tpCtaRoot.get<String?>("descricao"), props.tipoCtaSalario))
+                    else add(tpCtaRoot.get<String?>("descricao").`in`(props.tipoCtaSalario, props.tipoCtaCartao).not())
+
+                    if (props.somentePrevFinanceira) add(cb.equal(ctaRoot.get<Short?>("incPrevisao"), 1))
+
+                    if (props.somentePgInicial) add(cb.equal(ctaRoot.get<Short?>("mostrar"), 1))
+
+                    if (props.somenteCtaMovimentacao) add(cb.equal(tpCtaRoot.get<Short?>("capitalGiro"), 1))
+                }.toTypedArray<Predicate>()
             )
         }
 

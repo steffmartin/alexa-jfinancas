@@ -17,8 +17,11 @@ spring:
 custom-config:
   app:
     userId: ${JFSYNC_ALEXA_USER_ID}
-    tipoContaCartao: ${JFSYNC_TIPO_CTA_CARTAO:Cartão de Crédito}
-    tipoContaSalario: ${JFSYNC_TIPO_CTA_SALARIO:Salário}
+    tipoCtaCartao: ${JFSYNC_TIPO_CTA_CARTAO:Cartão de Crédito}
+    tipoCtaSalario: ${JFSYNC_TIPO_CTA_SALARIO:Salário}
+    somentePgInicial: ${JFSYNC_APENAS_PG_INI:false}
+    somentePrevFinanceira: ${JFSYNC_APENAS_PREV_FIN:false}
+    somenteCtaMovimentacao: ${JFSYNC_APENAS_CTA_MOV:false}
   aws:
     region: ${JFSYNC_AWS_REGION:${AWS_REGION:${AWS_DEFAULT_REGION}}}
     accessKeyId: ${JFSYNC_AWS_ACCESS_KEY_ID:${AWS_ACCESS_KEY_ID}}
