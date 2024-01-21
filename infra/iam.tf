@@ -34,15 +34,3 @@ resource "aws_iam_user_policy_attachment" "jfin_sync_attach_policy" {
 resource "aws_iam_access_key" "jfin_sync_access_key" {
   user = aws_iam_user.jfin_sync_user.name
 }
-
-#O valor será gravado no terraform.tfstate
-output "jfin_sync_access_key_id" {
-  value     = aws_iam_access_key.jfin_sync_access_key.id
-  sensitive = true
-}
-
-#O valor será gravado no terraform.tfstate
-output "jfin_sync_secret_access_key" {
-  value     = aws_iam_access_key.jfin_sync_access_key.secret
-  sensitive = true
-}
