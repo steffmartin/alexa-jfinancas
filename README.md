@@ -54,6 +54,8 @@ Antes de começar a utilizar a aplicação, certifique-se de atender aos seguint
     - Instalar o Firebird 2.5, que é utilizado para a acesso seguro aos dados financeiros do jFinanças Pessoal 2015.
 6. Terraform:
     - Instalar o Terraform para facilitar a criação da infraestrutura como código (IaC) na AWS.
+7. Java 20 ou superior:
+    - É necessário possuir o Java Runtime Environment (JRE) ou Java Development Kit (JDK) em versão 20 ou superior para compilação e execução da aplicação.
 
 ### Instalação
 
