@@ -14,11 +14,12 @@ spring:
     hibernate:
       ddl-auto: none
     show-sql: true
-aws:
-  region: ${JFSYNC_AWS_REGION:${AWS_REGION:${AWS_DEFAULT_REGION}}}
-  accessKeyId: ${JFSYNC_AWS_ACCESS_KEY_ID:${AWS_ACCESS_KEY_ID}}
-  secretAccessKey: ${JFSYNC_AWS_SECRET_ACCESS_KEY:${AWS_SECRET_ACCESS_KEY}}
-config:
-  userId: ${JFSYNC_ALEXA_USER_ID}
-  tipoContaCartao: ${JFSYNC_TIPO_CTA_CARTAO:Cartão de Crédito}
-  tipoContaSalario: ${JFSYNC_TIPO_CTA_SALARIO:Salário}
+custom-config:
+  app:
+    userId: ${JFSYNC_ALEXA_USER_ID}
+    tipoContaCartao: ${JFSYNC_TIPO_CTA_CARTAO:Cartão de Crédito}
+    tipoContaSalario: ${JFSYNC_TIPO_CTA_SALARIO:Salário}
+  aws:
+    region: ${JFSYNC_AWS_REGION:${AWS_REGION:${AWS_DEFAULT_REGION}}}
+    accessKeyId: ${JFSYNC_AWS_ACCESS_KEY_ID:${AWS_ACCESS_KEY_ID}}
+    secretAccessKey: ${JFSYNC_AWS_SECRET_ACCESS_KEY:${AWS_SECRET_ACCESS_KEY}}

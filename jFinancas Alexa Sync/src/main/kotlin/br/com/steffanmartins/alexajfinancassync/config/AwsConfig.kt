@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
-@ConfigurationProperties("aws")
+@ConfigurationProperties("custom-config.aws")
 data class AwsProperties(
     val region: String,
     val accessKeyId: String,
