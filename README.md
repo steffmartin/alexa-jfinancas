@@ -70,7 +70,10 @@ Antes de começar a utilizar a aplicação, certifique-se de atender aos seguint
 
 1. Navegue até a pasta `infra` do projeto:
     - Abra o terminal ou prompt de comando nesta pasta.
-2. Execute o comando Terraform:
+2. Execute os comandos Terraform:
+    ```bash
+    terraform init
+    ```
     ```bash
     terraform apply
     ```
