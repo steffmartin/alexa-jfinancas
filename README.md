@@ -1,5 +1,7 @@
 # Alexa jFinanças
 
+![](assets/banner.png)
+
 O projeto "Alexa jFinanças" é uma aplicação pessoal desenvolvida para facilitar o acesso e controle das finanças
 pessoais por meio da integração entre o software de finanças pessoais jFinanças Pessoal 2015 e a assistente virtual
 Alexa da Amazon.
@@ -55,7 +57,9 @@ Antes de começar a utilizar a aplicação, certifique-se de atender aos seguint
 6. Terraform:
     - Instalar o Terraform para facilitar a criação da infraestrutura como código (IaC) na AWS.
 7. Java 20 ou superior:
-    - É necessário possuir o Java Runtime Environment (JRE) ou Java Development Kit (JDK) em versão 20 ou superior para compilação e execução da aplicação.
+    - É necessário possuir o Java Development Kit (JDK) em versão 20 ou superior para compilação e execução da aplicação.
+8. Maven 3 ou superior:
+    - Ter o Maven 3 ou superior para compilação do projeto.
 
 ### Instalação
 
@@ -88,7 +92,7 @@ Antes de começar a utilizar a aplicação, certifique-se de atender aos seguint
     - Crie uma variável chamada `JFSYNC_AWS_SECRET_ACCESS_KEY` e preencha com o valor do
       *output* `jfin_sync_secret_access_key`.
 
-#### Etapa 2: Instalação do Aplicativo Local
+#### Etapa 2: Compilação do Aplicativo Local
 
 1. Navegue até a Pasta `jFinancas Alexa Sync` do projeto:
     - Abra o terminal ou prompt de comando nesta pasta.
@@ -99,7 +103,7 @@ Antes de começar a utilizar a aplicação, certifique-se de atender aos seguint
     - O Maven compilará o projeto e resolverá as dependências necessárias.
     - A pasta `target` será criada com o arquivo `.jar` da aplicação.
 
-#### Etapa 4: Configuração do Aplicativo Local
+#### Etapa 3: Configuração do Aplicativo Local
 
 A aplicação local utiliza variáveis de ambiente para configurar suas operações. Abaixo está a lista das variáveis de
 ambiente relevantes, juntamente com valores padrão, caso as variáveis não estejam definidas. Certifique-se de ajustar as
@@ -120,7 +124,7 @@ variáveis conforme necessário:
 | JFSYNC_APENAS_PREV_FIN       | `false`                                                          | Se `true` somente as contas incluídas nas previsões financeiras do jFinanças Pessoal 2015 serão sincronizadas com a Alexa |
 | JFSYNC_APENAS_CTA_MOV        | `false`                                                          | Se `true` somente as contas do tipo "movimentação" do jFinanças Pessoal 2015 serão sincronizadas com a Alexa              |
 
-#### Etapa 5: Configuração do Windows para Execução Local
+#### Etapa 4: Configuração do Windows para Execução Local
 
 1. Ativação da Auditoria de Acompanhamento de Processos:
     - Abra o Editor de Política de Grupo Local:
@@ -150,10 +154,10 @@ Até o momento, você já configurou um sistema local que sincroniza seus dados 
 Caso não observe qualquer notificação relacionada à execução desta sincronização, por favor, revise cuidadosamente os passos anteriores para garantir uma configuração correta.
 </blockquote>
 
-#### Etapa 6: Criação da Skill da Alexa
+#### Etapa 5: Criação da Skill da Alexa
 
 Em breve...
 
-#### Etapa 7: Instalação da Skill na sua Alexa
+#### Etapa 6: Instalação da Skill na sua Alexa
 
 Em breve...
