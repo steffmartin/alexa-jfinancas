@@ -14,8 +14,9 @@ resource "aws_dynamodb_table" "alexa_jfinancas_saldo" {
   hash_key  = "Usuario"
   range_key = "TipoEConta" # Ex: Investimentos#Poupança
 
-  billing_mode = "PAY_PER_REQUEST"
-  table_class  = "STANDARD_INFREQUENT_ACCESS"
+  billing_mode   = "PROVISIONED"
+  write_capacity = 25
+  read_capacity  = 25
 }
 
 resource "aws_dynamodb_table" "alexa_jfinancas_previsoes" {
@@ -34,6 +35,7 @@ resource "aws_dynamodb_table" "alexa_jfinancas_previsoes" {
   hash_key  = "Usuario"
   range_key = "VencimentoETipo" # Ex: 2024-12-31#PAGAR#hashcode
 
-  billing_mode = "PAY_PER_REQUEST"
-  table_class  = "STANDARD_INFREQUENT_ACCESS"
+  billing_mode   = "PROVISIONED"
+  write_capacity = 25
+  read_capacity  = 25
 }

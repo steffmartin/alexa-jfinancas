@@ -1,0 +1,169 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "minhas finanças",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "SaldoDaConta",
+          "slots": [
+            {
+              "name": "conta",
+              "type": "NomeDeConta"
+            }
+          ],
+          "samples": [
+            "saldo da conta {conta}",
+            "saldo da {conta}",
+            "saldo do {conta}",
+            "quanto eu tenho de {conta}",
+            "qual o saldo do meu {conta}",
+            "quanto eu tenho na {conta}",
+            "quanto eu tenho no {conta}",
+            "qual o saldo da {conta}",
+            "qual o saldo do {conta}",
+            "quanto eu tenho na conta {conta}",
+            "qual o saldo da minha conta {conta}"
+          ]
+        }
+      ],
+      "types": [
+        {
+          "name": "NomeDeConta",
+          "values": [
+            {
+              "name": {
+                "value": "bradesco",
+                "synonyms": [
+                  "banco bradesco"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "banco do brasil",
+                "synonyms": [
+                  "brasil",
+                  "bb"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "caixa",
+                "synonyms": [
+                  "caixa econômica",
+                  "cef",
+                  "caixa econômica federal"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "nu bank"
+              }
+            },
+            {
+              "name": {
+                "value": "pag bank"
+              }
+            },
+            {
+              "name": {
+                "value": "salário",
+                "synonyms": [
+                  "conta salário"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "cdb"
+              }
+            },
+            {
+              "name": {
+                "value": "lci"
+              }
+            },
+            {
+              "name": {
+                "value": "ticket",
+                "synonyms": [
+                  "vale refeição",
+                  "vale alimentação",
+                  "vale",
+                  "ticket refeição",
+                  "ticket alimentação",
+                  "flash"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "santander",
+                "synonyms": [
+                  "banco santander"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "itaú",
+                "synonyms": [
+                  "banco itaú"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "poupança"
+              }
+            },
+            {
+              "name": {
+                "value": "cartão de débito",
+                "synonyms": [
+                  "débito"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "cartão de crédito",
+                "synonyms": [
+                  "crédito"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "carteira",
+                "synonyms": [
+                  "moeda",
+                  "espécie",
+                  "dinheiro"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
