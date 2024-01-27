@@ -12,6 +12,7 @@
     <properties>
         <java.version>20</java.version>
         <kotlin.version>1.9.22</kotlin.version>
+        <ask.sdk.version>2.86.0</ask.sdk.version>
     </properties>
 
     <dependencies>
@@ -21,39 +22,38 @@
             <artifactId>kotlin-stdlib-jdk8</artifactId>
             <version>${kotlin.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-reflect</artifactId>
-            <version>${kotlin.version}</version>
-        </dependency>
-        <dependency> <!-- aws sdk requirement -->
-            <groupId>org.jetbrains.kotlinx</groupId>
-            <artifactId>kotlinx-coroutines-reactor</artifactId>
-            <version>1.7.3</version>
-            <scope>runtime</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.jetbrains.kotlin</groupId>-->
+<!--            <artifactId>kotlin-reflect</artifactId>-->
+<!--            <version>${kotlin.version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency> &lt;!&ndash; aws sdk requirement &ndash;&gt;-->
+<!--            <groupId>org.jetbrains.kotlinx</groupId>-->
+<!--            <artifactId>kotlinx-coroutines-reactor</artifactId>-->
+<!--            <version>1.7.3</version>-->
+<!--            <scope>runtime</scope>-->
+<!--        </dependency>-->
 
         <!-- aws -->
+<!--        <dependency>-->
+<!--            <groupId>aws.sdk.kotlin</groupId>-->
+<!--            <artifactId>dynamodb-jvm</artifactId>-->
+<!--            <version>1.0.0</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.amazonaws</groupId>-->
+<!--            <artifactId>aws-lambda-java-core</artifactId>-->
+<!--            <version>1.2.3</version>-->
+<!--        </dependency>-->
         <dependency>
-            <groupId>aws.sdk.kotlin</groupId>
-            <artifactId>dynamodb-jvm</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.amazonaws</groupId>
-            <artifactId>aws-lambda-java-core</artifactId>
-            <version>1.2.3</version>
+            <groupId>com.amazon.alexa</groupId>
+            <artifactId>ask-sdk-core</artifactId>
+            <version>${ask.sdk.version}</version>
         </dependency>
         <dependency>
             <groupId>com.amazon.alexa</groupId>
-            <artifactId>alexa-skills-kit</artifactId>
-            <version>1.8.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-test</artifactId>
-            <version>${kotlin.version}</version>
-            <scope>test</scope>
+            <artifactId>ask-sdk-lambda-support</artifactId>
+            <version>${ask.sdk.version}</version>
         </dependency>
 
     </dependencies>
@@ -100,28 +100,21 @@
                         <configuration>
                             <sourceDirs>
                                 <source>src/main/kotlin</source>
-                                <source>src/main/kotlin</source>
-                                <source>target/generated-sources/annotations</source>
-                            </sourceDirs>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>test-compile</id>
-                        <phase>test-compile</phase>
-                        <goals>
-                            <goal>test-compile</goal>
-                        </goals>
-                        <configuration>
-                            <sourceDirs>
-                                <source>src/test/kotlin</source>
-                                <source>src/test/kotlin</source>
-                                <source>target/generated-test-sources/test-annotations</source>
                             </sourceDirs>
                         </configuration>
                     </execution>
                 </executions>
                 <configuration>
-                    <jvmTarget>1.8</jvmTarget>
+                    <jvmTarget>20</jvmTarget>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.12.1</version>
+                <configuration>
+                    <source>20</source>
+                    <target>20</target>
                 </configuration>
             </plugin>
         </plugins>

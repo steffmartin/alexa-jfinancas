@@ -1,6 +1,23 @@
 package br.com.steffanmartins.alexajfinancasskill
 
-import com.amazon.speech.speechlet.lambda.SpeechletRequestStreamHandler
+import br.com.steffanmartins.alexajfinancasskill.exception.GenericExceptionHandler
+import br.com.steffanmartins.alexajfinancasskill.handler.OnCloseHandler
+import br.com.steffanmartins.alexajfinancasskill.handler.OnHelpHandler
+import br.com.steffanmartins.alexajfinancasskill.handler.OnLaunchHandler
+import br.com.steffanmartins.alexajfinancasskill.handler.SaldoDaContaIntentHandler
+import com.amazon.ask.SkillStreamHandler
+import com.amazon.ask.builder.SkillBuilder
 
-//TODO colocar app id
-class AlexaHandler : SpeechletRequestStreamHandler(AlexaController(), setOf("amzn1.ask.skill.987654321"))
+class AlexaHandler : SkillStreamHandler(skillConfig) {
+    companion object {
+        val skillConfig = SkillBuilder()
+            .addRequestHandlers(
+                OnLaunchHandler(),
+                OnHelpHandler(),
+                SaldoDaContaIntentHandler(),
+                OnCloseHandler()
+            )
+            .addExceptionHandler(GenericExceptionHandler())
+            .build()
+    }
+}
