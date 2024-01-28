@@ -5,19 +5,38 @@
       "intents": [
         {
           "name": "AMAZON.CancelIntent",
-          "samples": []
+          "samples": [
+            "discordo",
+            "errado",
+            "não",
+            "desfazer",
+            "anular",
+            "cancelar"
+          ]
         },
         {
           "name": "AMAZON.HelpIntent",
-          "samples": []
+          "samples": [
+            "pode me ajudar",
+            "o que você pode fazer",
+            "me ajude",
+            "dicas",
+            "ajuda"
+          ]
         },
         {
           "name": "AMAZON.StopIntent",
-          "samples": []
+          "samples": [
+            "sair",
+            "fechar"
+          ]
         },
         {
           "name": "AMAZON.NavigateHomeIntent",
-          "samples": []
+          "samples": [
+            "início",
+            "página inicial"
+          ]
         },
         {
           "name": "SaldoDaConta",
@@ -28,17 +47,39 @@
             }
           ],
           "samples": [
+            "qual o saldo da minha conta no {conta}",
+            "qual o saldo da minha conta na {conta}",
+            "qual o saldo da conta {conta}",
             "saldo da conta {conta}",
-            "saldo da {conta}",
-            "saldo do {conta}",
-            "quanto eu tenho de {conta}",
             "qual o saldo do meu {conta}",
-            "quanto eu tenho na {conta}",
-            "quanto eu tenho no {conta}",
-            "qual o saldo da {conta}",
-            "qual o saldo do {conta}",
-            "quanto eu tenho na conta {conta}",
-            "qual o saldo da minha conta {conta}"
+            "qual o saldo da minha {conta}",
+            "saldo no {conta}",
+            "saldo de {conta}",
+            "saldo em {conta}",
+            "saldo da {conta}",
+            "saldo do {conta}"
+          ]
+        },
+        {
+          "name": "TotalDoTipoDeConta",
+          "slots": [
+            {
+              "name": "tipo",
+              "type": "TipoDeConta"
+            }
+          ],
+          "samples": [
+            "qual o total do tipo {tipo}",
+            "qual o total da categoria {tipo}",
+            "total do tipo {tipo}",
+            "total da categoria {tipo}",
+            "total do {tipo}",
+            "qual o total das {tipo}",
+            "qual o total dos {tipo}",
+            "qual o total de {tipo}",
+            "total das {tipo}",
+            "total dos {tipo}",
+            "total de {tipo}"
           ]
         }
       ],
@@ -46,6 +87,14 @@
         {
           "name": "NomeDeConta",
           "values": [
+            {
+              "name": {
+                "value": "fgts",
+                "synonyms": [
+                  "fundo de garantia"
+                ]
+              }
+            },
             {
               "name": {
                 "value": "bradesco",
@@ -75,19 +124,22 @@
             },
             {
               "name": {
-                "value": "nu bank"
-              }
-            },
-            {
-              "name": {
-                "value": "pag bank"
-              }
-            },
-            {
-              "name": {
-                "value": "salário",
+                "value": "nu bank",
                 "synonyms": [
-                  "conta salário"
+                  "nu conta"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "pagbank"
+              }
+            },
+            {
+              "name": {
+                "value": "conta salário",
+                "synonyms": [
+                  "salário"
                 ]
               }
             },
@@ -103,14 +155,14 @@
             },
             {
               "name": {
-                "value": "ticket",
+                "value": "flash",
                 "synonyms": [
+                  "ticket",
                   "vale refeição",
                   "vale alimentação",
                   "vale",
                   "ticket refeição",
-                  "ticket alimentação",
-                  "flash"
+                  "ticket alimentação"
                 ]
               }
             },
@@ -158,6 +210,126 @@
                   "moeda",
                   "espécie",
                   "dinheiro"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "TipoDeConta",
+          "values": [
+            {
+              "name": {
+                "value": "salário",
+                "synonyms": [
+                  "contas salário"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "fundo de garantia",
+                "synonyms": [
+                  "fgts"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "transitória",
+                "synonyms": [
+                  "temporária"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "carteira virtual",
+                "synonyms": [
+                  "cashback",
+                  "virtual"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "investimento",
+                "synonyms": [
+                  "aplicação"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "vale e pré-pago",
+                "synonyms": [
+                  "vale",
+                  "pré pago",
+                  "ticket"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "cartão de crédito",
+                "synonyms": [
+                  "cartões",
+                  "crédito"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "dinheiro",
+                "synonyms": [
+                  "moeda",
+                  "espécie"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "conta bancária",
+                "synonyms": [
+                  "contas corrente",
+                  "capital de giro",
+                  "conta movimentação",
+                  "movimentação",
+                  "corrente"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "TipoDePrevisao",
+          "values": [
+            {
+              "name": {
+                "value": "despesa",
+                "synonyms": [
+                  "negativo",
+                  "débito",
+                  "custo",
+                  "gasto",
+                  "pagamento",
+                  "pagar",
+                  "fatura",
+                  "boleto"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "receita",
+                "synonyms": [
+                  "provento",
+                  "receber",
+                  "positivo",
+                  "crédito",
+                  "bônus",
+                  "recebimento",
+                  "salário"
                 ]
               }
             }

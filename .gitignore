@@ -1,6 +1,8 @@
 /.idea/
 /infra/.terraform.lock.hcl
+/infra/.terraform.tfstate.lock.info
 /infra/.terraform/
 /infra/terraform.tfstate
 /infra/terraform.tfstate.backup
+/infra/terraform.tfvars
 /assets/.$Diagrama Geral.drawio.bkp
