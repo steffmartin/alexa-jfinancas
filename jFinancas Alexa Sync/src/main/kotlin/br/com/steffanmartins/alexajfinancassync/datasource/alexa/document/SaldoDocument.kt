@@ -15,5 +15,5 @@ data class SaldoDocument(
     override fun partitionKeyName(): String = "Usuario"
     override fun partitionKeyValue(): String = usuario
     override fun sortKeyName(): String = "TipoEConta"
-    override fun sortKeyValue(): String = "${tipoConta}#${conta}"
+    override fun sortKeyValue(): String = "${tipoConta}#${conta}".uppercase()
 }

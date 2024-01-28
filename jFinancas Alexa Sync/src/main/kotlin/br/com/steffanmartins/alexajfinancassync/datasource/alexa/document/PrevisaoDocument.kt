@@ -21,7 +21,7 @@ data class PrevisaoDocument(
     override fun partitionKeyName(): String = "Usuario"
     override fun partitionKeyValue(): String = usuario
     override fun sortKeyName(): String = "VencimentoETipo"
-    override fun sortKeyValue(): String = "${vencimento}#${tipo}#${hashCode()}"
+    override fun sortKeyValue(): String = "${vencimento}#${tipo}#${hashCode()}".uppercase()
 
     enum class TipoPrevisao {
         PAGAR, RECEBER
