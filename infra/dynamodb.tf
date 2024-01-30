@@ -12,11 +12,11 @@ resource "aws_dynamodb_table" "alexa_jfinancas_saldo" {
   }
 
   hash_key  = "Usuario"
-  range_key = "TipoEConta" # Ex: Investimentos#Poupança
+  range_key = "TipoEConta"
 
   billing_mode   = "PROVISIONED"
-  write_capacity = 25
-  read_capacity  = 25
+  write_capacity = 2
+  read_capacity  = 2
 }
 
 resource "aws_dynamodb_table" "alexa_jfinancas_previsoes" {
@@ -33,9 +33,9 @@ resource "aws_dynamodb_table" "alexa_jfinancas_previsoes" {
   }
 
   hash_key  = "Usuario"
-  range_key = "VencimentoETipo" # Ex: 2024-12-31#PAGAR#hashcode
+  range_key = "VencimentoETipo"
 
   billing_mode   = "PROVISIONED"
-  write_capacity = 25
-  read_capacity  = 25
+  write_capacity = 2
+  read_capacity  = 2
 }
