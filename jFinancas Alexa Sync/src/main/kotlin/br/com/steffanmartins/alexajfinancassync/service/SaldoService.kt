@@ -37,18 +37,19 @@ class SaldoService(
     }
 
     private fun filtroContas() = Specification<JFinancasContaEntity> { ctaRoot, _, cb ->
+        val tpCtaRoot = ctaRoot.join<JFinancasContaEntity, JFinancasTipocontaEntity>("tipoConta")
+
         cb.and(
             *mutableListOf<Predicate>().apply {
                 add(cb.equal(ctaRoot.get<Short?>("inativo"), 0))
+
+                add(tpCtaRoot.get<String?>("descricao").`in`(props.tipoCtaSalario, props.tipoCtaCartao).not())
 
                 if (props.somentePrevFinanceira) add(cb.equal(ctaRoot.get<Short?>("incPrevisao"), 1))
 
                 if (props.somentePgInicial) add(cb.equal(ctaRoot.get<Short?>("mostrar"), 1))
 
-                if (props.somenteCtaMovimentacao) {
-                    val tipoContaRoot = ctaRoot.join<JFinancasTipocontaEntity, JFinancasContaEntity>("tipoConta")
-                    add(cb.equal(tipoContaRoot.get<Short?>("capitalGiro"), 1))
-                }
+                if (props.somenteCtaMovimentacao) add(cb.equal(tpCtaRoot.get<Short?>("capitalGiro"), 1))
             }.toTypedArray<Predicate>()
         )
     }
