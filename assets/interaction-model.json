@@ -47,17 +47,7 @@
             }
           ],
           "samples": [
-            "qual o saldo da minha conta no {conta}",
-            "qual o saldo da minha conta na {conta}",
-            "qual o saldo da conta {conta}",
-            "saldo da conta {conta}",
-            "qual o saldo do meu {conta}",
-            "qual o saldo da minha {conta}",
-            "saldo no {conta}",
-            "saldo de {conta}",
-            "saldo em {conta}",
-            "saldo da {conta}",
-            "saldo do {conta}"
+            "saldo {conta}"
           ]
         },
         {
@@ -69,17 +59,59 @@
             }
           ],
           "samples": [
-            "qual o total do tipo {tipo}",
-            "qual o total da categoria {tipo}",
-            "total do tipo {tipo}",
-            "total da categoria {tipo}",
-            "total do {tipo}",
-            "qual o total das {tipo}",
-            "qual o total dos {tipo}",
-            "qual o total de {tipo}",
-            "total das {tipo}",
-            "total dos {tipo}",
-            "total de {tipo}"
+            "total {tipo}"
+          ]
+        },
+        {
+          "name": "PrevisaoNaData",
+          "slots": [
+            {
+              "name": "previsao",
+              "type": "TipoDePrevisao"
+            },
+            {
+              "name": "data",
+              "type": "AMAZON.DATE"
+            }
+          ],
+          "samples": [
+            "{previsao} {data}"
+          ]
+        },
+        {
+          "name": "PrevisaoVencidaOuNaoBaixada",
+          "slots": [
+            {
+              "name": "previsao",
+              "type": "TipoDePrevisao"
+            }
+          ],
+          "samples": [
+            "{previsao} vencidas"
+          ]
+        },
+        {
+          "name": "ValorDaPrevisao",
+          "slots": [
+            {
+              "name": "categoria",
+              "type": "CategoriaDePrevisao"
+            }
+          ],
+          "samples": [
+            "valor {categoria}"
+          ]
+        },
+        {
+          "name": "DataDaPrevisao",
+          "slots": [
+            {
+              "name": "categoria",
+              "type": "CategoriaDePrevisao"
+            }
+          ],
+          "samples": [
+            "data {categoria}"
           ]
         }
       ],
@@ -255,6 +287,8 @@
               "name": {
                 "value": "investimento",
                 "synonyms": [
+                  "aplicado",
+                  "investido",
                   "aplicação"
                 ]
               }
@@ -306,14 +340,34 @@
           "values": [
             {
               "name": {
+                "value": "ambos",
+                "synonyms": [
+                  "lançamento",
+                  "algo",
+                  "agendado",
+                  "agendamento",
+                  "previsão",
+                  "coisa"
+                ]
+              }
+            },
+            {
+              "name": {
                 "value": "despesa",
                 "synonyms": [
-                  "negativo",
+                  "vence",
+                  "a vencer",
+                  "vencendo",
+                  "pagar",
+                  "pago",
+                  "devendo",
+                  "devo",
+                  "compromisso",
+                  "conta",
                   "débito",
                   "custo",
                   "gasto",
                   "pagamento",
-                  "pagar",
                   "fatura",
                   "boleto"
                 ]
@@ -323,13 +377,112 @@
               "name": {
                 "value": "receita",
                 "synonyms": [
+                  "recebo",
+                  "receberei",
+                  "recebível",
                   "provento",
                   "receber",
-                  "positivo",
                   "crédito",
                   "bônus",
                   "recebimento",
                   "salário"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "CategoriaDePrevisao",
+          "values": [
+            {
+              "name": {
+                "value": "IPTU",
+                "synonyms": [
+                  "imposto predial"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "licenciamento",
+                "synonyms": [
+                  "taxa de licenciamento"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "IPVA"
+              }
+            },
+            {
+              "name": {
+                "value": "décimo terceiro",
+                "synonyms": [
+                  "segunda parcela décimo terceiro",
+                  "primeira parcela décimo terceiro",
+                  "adiantamento décimo terceiro"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "internet",
+                "synonyms": [
+                  "wi fi",
+                  "provedor de internet"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "ticket",
+                "synonyms": [
+                  "ticket refeição",
+                  "ticket alimentação",
+                  "vale",
+                  "flash",
+                  "vale refeição",
+                  "vale alimentação"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "salário",
+                "synonyms": [
+                  "salário líquido"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "condomínio",
+                "synonyms": [
+                  "taxa de condomínio"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "energia",
+                "synonyms": [
+                  "luz",
+                  "conta de luz",
+                  "energia elétrica",
+                  "conta de energia"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "cartão de crédito",
+                "synonyms": [
+                  "visa",
+                  "master card",
+                  "fatura do cartão",
+                  "cartão",
+                  "fatura"
                 ]
               }
             }

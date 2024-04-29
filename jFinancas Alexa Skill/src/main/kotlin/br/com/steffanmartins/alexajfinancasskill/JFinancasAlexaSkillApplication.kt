@@ -1,7 +1,6 @@
 package br.com.steffanmartins.alexajfinancasskill
 
-import br.com.steffanmartins.alexajfinancasskill.intent.custom.SaldoDaContaIntent
-import br.com.steffanmartins.alexajfinancasskill.intent.custom.TotalDoTipoDeContaIntent
+import br.com.steffanmartins.alexajfinancasskill.intent.custom.*
 import br.com.steffanmartins.alexajfinancasskill.intent.exception.ErrorIntent
 import br.com.steffanmartins.alexajfinancasskill.intent.standard.CancelIntent
 import br.com.steffanmartins.alexajfinancasskill.intent.standard.HelpIntent
@@ -19,6 +18,10 @@ class JFinancasAlexaSkillApplication : SkillStreamHandler(skillConfig) {
                 OnLaunch(),
                 SaldoDaContaIntent(),
                 TotalDoTipoDeContaIntent(),
+                PrevisaoNaDataIntent(),
+                PrevisaoVencidaOuNaoBaixadaIntent(),
+                ValorDaPrevisaoIntent(),
+                DataDaPrevisaoIntent(),
                 CancelIntent(),
                 HelpIntent(),
                 OnSessionEnded()
