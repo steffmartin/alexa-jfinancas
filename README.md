@@ -1,3 +1,5 @@
+> **Disclaimer**: Esse projeto foi descontinuado antes de sua conclusão devido a limitações de tempo e dedicação a outras iniciativas. Mesmo assim, ele permanece público para servir como uma referência e fonte de aprendizado para outros desenvolvedores. Sinta-se à vontade para explorar o código.
+
 # Alexa jFinanças
 
 ![](assets/banner.png)
